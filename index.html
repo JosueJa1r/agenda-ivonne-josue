@@ -7,6 +7,28 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Pantalla inicial de selección de usuario -->
+    <div class="login-screen" id="loginScreen">
+        <div class="login-content">
+            <h1 class="login-title">💕 Nuestra Agenda Compartida 💕</h1>
+            <p class="login-subtitle">¿Quién está usando la agenda?</p>
+            
+            <div class="user-selection">
+                <div class="user-card josue-card" data-user="josue">
+                    <div class="user-icon">👨‍💻</div>
+                    <h2>Josué</h2>
+                    <p>Entrar como Josué</p>
+                </div>
+                
+                <div class="user-card ivonne-card" data-user="ivonne">
+                    <div class="user-icon">👩‍💻</div>
+                    <h2>Ivonne</h2>
+                    <p>Entrar como Ivonne</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Mensaje de bienvenida -->
     <div class="welcome-overlay" id="welcomeOverlay">
         <div class="welcome-content">
@@ -16,16 +38,19 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" id="mainContainer" style="display: none;">
         <header>
-            <h1>💕 Nuestra Agenda Compartida 💕</h1>
-            <p class="subtitle">Marca los días que no tienes disponibilidad</p>
+            <div class="header-content">
+                <div>
+                    <h1>💕 Nuestra Agenda Compartida 💕</h1>
+                    <p class="subtitle">Marca los días que no tienes disponibilidad</p>
+                </div>
+                <button class="logout-btn" id="logoutBtn" title="Cambiar de usuario">👤</button>
+            </div>
+            <div class="current-user-display" id="currentUserDisplay">
+                Usando como: <strong id="currentUserName">Josué</strong>
+            </div>
         </header>
-
-        <div class="user-selector">
-            <button class="user-btn active" data-user="josue">Josué</button>
-            <button class="user-btn" data-user="ivonne">Ivonne</button>
-        </div>
 
         <div class="calendar-header">
             <button id="prevMonth">&lt;</button>

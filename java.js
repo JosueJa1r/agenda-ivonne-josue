@@ -22,11 +22,15 @@ function getBirthdayName(day, month) {
 }
 
 // Elementos del DOM
+const loginScreen = document.getElementById('loginScreen');
+const mainContainer = document.getElementById('mainContainer');
+const userCards = document.querySelectorAll('.user-card');
+const logoutBtn = document.getElementById('logoutBtn');
+const currentUserNameEl = document.getElementById('currentUserName');
 const calendar = document.getElementById('calendar');
 const currentMonthEl = document.getElementById('currentMonth');
 const prevMonthBtn = document.getElementById('prevMonth');
 const nextMonthBtn = document.getElementById('nextMonth');
-const userBtns = document.querySelectorAll('.user-btn');
 const daysListEl = document.getElementById('daysList');
 const timeModal = document.getElementById('timeModal');
 const closeModalBtn = document.getElementById('closeModal');
@@ -48,44 +52,81 @@ const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
 prevMonthBtn.addEventListener('click', () => changeMonth(-1));
 nextMonthBtn.addEventListener('click', () => changeMonth(1));
 
-// Mostrar mensaje de bienvenida al cargar
-window.addEventListener('DOMContentLoaded', () => {
-    showWelcomeMessage();
-    createFloatingHearts();
-});
-
-userBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        userBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        currentUser = btn.dataset.user;
-        updateWelcomeMessage();
+// Event listeners para login
+userCards.forEach(card => {
+    card.addEventListener('click', () => {
+        const user = card.dataset.user;
+        loginUser(user);
     });
 });
 
+logoutBtn.addEventListener('click', () => {
+    logoutUser();
+});
+
+// Verificar si hay usuario guardado al cargar
+window.addEventListener('DOMContentLoaded', () => {
+    const savedUser = localStorage.getItem('currentUser');
+    if (savedUser) {
+        currentUser = savedUser;
+        showMainApp();
+    }
+});
+
+function loginUser(user) {
+    currentUser = user;
+    localStorage.setItem('currentUser', user);
+    
+    // Ocultar pantalla de login
+    loginScreen.style.display = 'none';
+    
+    // Mostrar bienvenida
+    showWelcomeMessage();
+    createFloatingHearts();
+    
+    // Después de la bienvenida, mostrar app
+    setTimeout(() => {
+        showMainApp();
+    }, 3000);
+}
+
+function showMainApp() {
+    mainContainer.style.display = 'block';
+    currentUserNameEl.textContent = currentUser === 'josue' ? 'Josué' : 'Ivonne';
+    currentUserNameEl.style.color = currentUser === 'josue' ? '#00ff88' : '#ff69b4';
+    
+    const userDisplay = document.getElementById('currentUserDisplay');
+    userDisplay.style.borderColor = currentUser === 'josue' ? '#00ff88' : '#ff69b4';
+    
+    // Cargar calendario
+    loadUnavailableDays();
+}
+
+function logoutUser() {
+    localStorage.removeItem('currentUser');
+    mainContainer.style.display = 'none';
+    loginScreen.style.display = 'flex';
+    
+    // Reset
+    const welcomeOverlay = document.getElementById('welcomeOverlay');
+    welcomeOverlay.style.display = 'none';
+    welcomeOverlay.style.animation = 'none';
+}
+
 function showWelcomeMessage() {
+    const welcomeOverlay = document.getElementById('welcomeOverlay');
     const welcomeTitle = document.getElementById('welcomeTitle');
     const userName = currentUser === 'josue' ? 'Josué' : 'Ivonne';
     const emoji = currentUser === 'josue' ? '💚' : '💗';
     
     welcomeTitle.textContent = `¡Hola ${userName}! ${emoji}`;
     welcomeTitle.style.color = currentUser === 'josue' ? '#00ff88' : '#ff69b4';
+    
+    welcomeOverlay.style.display = 'flex';
+    welcomeOverlay.style.animation = 'fadeOut 0.5s ease 2.5s forwards';
 }
 
-function updateWelcomeMessage() {
-    const welcomeOverlay = document.getElementById('welcomeOverlay');
-    welcomeOverlay.style.display = 'flex';
-    welcomeOverlay.style.animation = 'none';
-    welcomeOverlay.style.opacity = '1';
-    welcomeOverlay.style.visibility = 'visible';
-    
-    showWelcomeMessage();
-    
-    // Ocultar después de 2 segundos
-    setTimeout(() => {
-        welcomeOverlay.style.animation = 'fadeOut 0.5s ease forwards';
-    }, 2000);
-}
+
 
 function createFloatingHearts() {
     const heartsContainer = document.getElementById('heartsContainer');
