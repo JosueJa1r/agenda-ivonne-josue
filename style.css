@@ -540,6 +540,73 @@ header h1 {
     color: white;
 }
 
+/* Tooltip de horas */
+.hours-tooltip {
+    position: fixed;
+    transform: translate(-50%, -100%);
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    border: 2px solid #00ff88;
+    border-radius: 10px;
+    padding: 12px 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    display: none;
+    min-width: 200px;
+    pointer-events: none;
+    animation: tooltipFadeIn 0.2s;
+}
+
+@keyframes tooltipFadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -90%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -100%);
+    }
+}
+
+.tooltip-title {
+    color: #00ff88;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-align: center;
+    font-size: 0.9em;
+    border-bottom: 1px solid #00ff88;
+    padding-bottom: 5px;
+}
+
+.tooltip-user {
+    margin: 5px 0;
+    font-size: 0.85em;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.josue-hours {
+    background: rgba(0, 255, 136, 0.1);
+    border-left: 3px solid #00ff88;
+}
+
+.josue-hours strong {
+    color: #00ff88;
+}
+
+.ivonne-hours {
+    background: rgba(255, 105, 180, 0.1);
+    border-left: 3px solid #ff69b4;
+}
+
+.ivonne-hours strong {
+    color: #ff69b4;
+}
+
+.tooltip-user {
+    color: #ccc;
+    line-height: 1.4;
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 15px;

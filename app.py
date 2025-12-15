@@ -218,6 +218,38 @@ def get_hours(date, user):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/hours-all/<date>', methods=['GET'])
+def get_hours_all(date):
+    """Obtener horas ocupadas de un día para todos los usuarios"""
+    try:
+        conn = get_db()
+        cursor = conn.cursor()
+        
+        # Obtener horas de Josué
+        cursor.execute('''
+            SELECT hour FROM unavailable_hours
+            WHERE date = ? AND user = 'josue'
+            ORDER BY hour
+        ''', (date,))
+        josue_hours = [row['hour'] for row in cursor.fetchall()]
+        
+        # Obtener horas de Ivonne
+        cursor.execute('''
+            SELECT hour FROM unavailable_hours
+            WHERE date = ? AND user = 'ivonne'
+            ORDER BY hour
+        ''', (date,))
+        ivonne_hours = [row['hour'] for row in cursor.fetchall()]
+        
+        conn.close()
+        return jsonify({
+            'josue': josue_hours,
+            'ivonne': ivonne_hours
+        })
+    
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/api/hours', methods=['POST'])
 def save_hours():
     """Guardar horas ocupadas de un día para un usuario"""

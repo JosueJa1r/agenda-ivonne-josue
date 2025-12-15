@@ -163,6 +163,16 @@ function createDayElement(day, isOtherMonth, year, month) {
                     dayEl.appendChild(indicator);
                 }
             }
+            
+            // Agregar evento hover para mostrar horas específicas
+            dayEl.addEventListener('mouseenter', async (e) => {
+                const hours = await getHoursForDate(dateStr);
+                showHoursTooltip(e, dateStr, hours);
+            });
+            
+            dayEl.addEventListener('mouseleave', () => {
+                hideHoursTooltip();
+            });
         }
     }
     
@@ -244,6 +254,19 @@ async function loadSelectedHours(dateStr) {
     }
 }
 
+async function getHoursForDate(dateStr) {
+    try {
+        const response = await fetch(`${API_URL}/hours-all/${dateStr}`);
+        if (response.ok) {
+            return await response.json();
+        }
+        return { josue: [], ivonne: [] };
+    } catch (error) {
+        console.error('Error al cargar horas del día:', error);
+        return { josue: [], ivonne: [] };
+    }
+}
+
 async function saveHours() {
     try {
         const response = await fetch(`${API_URL}/hours`, {
@@ -273,6 +296,86 @@ async function saveHours() {
 function clearAllHours() {
     selectedHours = [];
     renderTimeGrid();
+}
+
+let tooltipEl = null;
+
+function showHoursTooltip(event, dateStr, hours) {
+    // Crear tooltip si no existe
+    if (!tooltipEl) {
+        tooltipEl = document.createElement('div');
+        tooltipEl.classList.add('hours-tooltip');
+        document.body.appendChild(tooltipEl);
+    }
+    
+    const date = new Date(dateStr);
+    const formattedDate = `${date.getDate()} de ${monthNames[date.getMonth()]}`;
+    
+    let content = `<div class="tooltip-title">${formattedDate}</div>`;
+    
+    if (hours.josue && hours.josue.length > 0) {
+        content += `<div class="tooltip-user josue-hours">`;
+        content += `<strong>Josué:</strong> ${formatHoursRange(hours.josue)}`;
+        content += `</div>`;
+    }
+    
+    if (hours.ivonne && hours.ivonne.length > 0) {
+        content += `<div class="tooltip-user ivonne-hours">`;
+        content += `<strong>Ivonne:</strong> ${formatHoursRange(hours.ivonne)}`;
+        content += `</div>`;
+    }
+    
+    tooltipEl.innerHTML = content;
+    tooltipEl.style.display = 'block';
+    
+    // Posicionar tooltip
+    const rect = event.target.getBoundingClientRect();
+    tooltipEl.style.left = rect.left + (rect.width / 2) + 'px';
+    tooltipEl.style.top = (rect.top - 10) + 'px';
+}
+
+function hideHoursTooltip() {
+    if (tooltipEl) {
+        tooltipEl.style.display = 'none';
+    }
+}
+
+function formatHoursRange(hours) {
+    if (!hours || hours.length === 0) return 'Sin horas';
+    
+    // Ordenar horas
+    const sorted = hours.sort();
+    
+    // Agrupar horas consecutivas
+    const ranges = [];
+    let start = sorted[0];
+    let prev = sorted[0];
+    
+    for (let i = 1; i < sorted.length; i++) {
+        const current = sorted[i];
+        const prevHour = parseInt(prev.split(':')[0]);
+        const currentHour = parseInt(current.split(':')[0]);
+        
+        if (currentHour !== prevHour + 1) {
+            // No consecutivo, guardar rango
+            if (start === prev) {
+                ranges.push(start);
+            } else {
+                ranges.push(`${start}-${prev}`);
+            }
+            start = current;
+        }
+        prev = current;
+    }
+    
+    // Agregar último rango
+    if (start === prev) {
+        ranges.push(start);
+    } else {
+        ranges.push(`${start}-${prev}`);
+    }
+    
+    return ranges.join(', ');
 }
 
 async function loadUnavailableDays() {
