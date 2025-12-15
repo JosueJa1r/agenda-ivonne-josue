@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuestra Agenda Compartida 💕</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💕 Nuestra Agenda Compartida 💕</h1>
+            <p class="subtitle">Marca los días que no tienes disponibilidad</p>
+        </header>
+
+        <div class="user-selector">
+            <button class="user-btn active" data-user="josue">Josué</button>
+            <button class="user-btn" data-user="ivonne">Ivonne</button>
+        </div>
+
+        <div class="calendar-header">
+            <button id="prevMonth">&lt;</button>
+            <h2 id="currentMonth"></h2>
+            <button id="nextMonth">&gt;</button>
+        </div>
+
+        <div class="calendar" id="calendar"></div>
+
+        <div class="important-dates">
+            <h3>🎂 Fechas Importantes</h3>
+            <div class="dates-list">
+                <div class="important-date birthday-josue">
+                    <span class="date-icon">🎉</span>
+                    <div class="date-info">
+                        <strong>12 de Junio</strong>
+                        <span>Cumpleaños de Josué</span>
+                    </div>
+                </div>
+                <div class="important-date birthday-ivonne">
+                    <span class="date-icon">🎂</span>
+                    <div class="date-info">
+                        <strong>7 de Enero</strong>
+                        <span>Cumpleaños de Ivonne</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <span class="legend-color josue"></span>
+                <span>Josué no disponible</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color ivonne"></span>
+                <span>Ivonne no disponible</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color both"></span>
+                <span>Ambos no disponibles</span>
+            </div>
+            <div class="legend-item">
+                <span class="legend-color birthday"></span>
+                <span>Cumpleaños</span>
+            </div>
+        </div>
+
+        <div class="info-panel" id="infoPanel">
+            <h3>Días marcados este mes</h3>
+            <div id="daysList"></div>
+        </div>
+    </div>
+
+    <!-- Modal de selección de horas -->
+    <div class="modal" id="timeModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Seleccionar horas - <span id="modalDate"></span></h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-subtitle">Selecciona las horas en las que <strong id="modalUser"></strong> no está disponible:</p>
+                <div class="time-grid" id="timeGrid"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="clearAllHours">Limpiar todo</button>
+                <button class="btn-primary" id="saveHours">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="java.js"></script>
+</body>
+</html>

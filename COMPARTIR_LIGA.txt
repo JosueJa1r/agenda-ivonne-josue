@@ -1,0 +1,52 @@
+🌐 LIGA TEMPORAL PARA COMPARTIR
+================================
+
+OPCIÓN 1: Ngrok (Recomendada) - 5 MINUTOS
+------------------------------------------
+
+1. Ve a: https://dashboard.ngrok.com/signup
+2. Regístrate gratis (puedes usar tu cuenta de Google/GitHub)
+3. Copia tu authtoken de: https://dashboard.ngrok.com/get-started/your-authtoken
+4. En la terminal de PowerShell, ejecuta:
+
+   .\ngrok.exe config add-authtoken TU_TOKEN_AQUI
+   .\ngrok.exe http 5000
+
+5. Ngrok te dará una URL como: https://abc123.ngrok-free.app
+6. Comparte esa URL con Ivonne agregando /app al final:
+   
+   Ejemplo: https://abc123.ngrok-free.app/app
+
+7. ¡Listo! Ella podrá acceder desde cualquier lugar
+
+
+OPCIÓN 2: Cloudflare Tunnel (Sin registro)
+-------------------------------------------
+
+1. Descarga Cloudflare Tunnel:
+   https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-windows-amd64.exe
+
+2. Renómbralo a cloudflared.exe y muévelo a esta carpeta
+
+3. Ejecuta en PowerShell:
+   .\cloudflared.exe tunnel --url http://localhost:5000
+
+4. Te dará una URL como: https://abc-123.trycloudflare.com
+5. Comparte: https://abc-123.trycloudflare.com/app
+
+
+LA URL FINAL SERÁ:
+==================
+Tu_URL/app  ← Agrega /app al final
+
+Ejemplo:
+- https://abc123.ngrok-free.app/app
+- https://abc-123.trycloudflare.com/app
+
+
+IMPORTANTE:
+===========
+- Tu computadora debe estar encendida
+- El servidor Python debe estar corriendo (python app.py)
+- El túnel (ngrok o cloudflared) debe estar activo
+- La conexión es temporal, se cierra cuando cierras la terminal

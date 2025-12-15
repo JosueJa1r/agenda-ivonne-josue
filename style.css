@@ -1,0 +1,595 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a1a 0%, #6a0dad 100%);
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    padding: 30px;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+header h1 {
+    color: #00ff88;
+    font-size: 2.5em;
+    margin-bottom: 10px;
+    text-shadow: 0 0 10px rgba(0, 255, 136, 0.5);
+}
+
+.subtitle {
+    color: #666;
+    font-size: 1.1em;
+}
+
+.user-selector {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.user-btn {
+    padding: 12px 30px;
+    border: 2px solid #00ff88;
+    background: #1a1a1a;
+    color: #00ff88;
+    border-radius: 25px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: bold;
+}
+
+.user-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.5);
+}
+
+.user-btn.active {
+    background: #00ff88;
+    color: #1a1a1a;
+}
+
+.user-btn[data-user="ivonne"] {
+    border-color: #ff69b4;
+    color: #ff69b4;
+}
+
+.user-btn[data-user="ivonne"]:hover {
+    box-shadow: 0 5px 15px rgba(255, 105, 180, 0.5);
+}
+
+.user-btn[data-user="ivonne"].active {
+    background: #ff69b4;
+    color: white;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 0 20px;
+}
+
+.calendar-header button {
+    background: #00ff88;
+    color: #1a1a1a;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.calendar-header button:hover {
+    background: #6a0dad;
+    color: white;
+    transform: scale(1.1);
+}
+
+.calendar-header h2 {
+    color: #333;
+    font-size: 1.8em;
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin-bottom: 30px;
+}
+
+.day-name {
+    text-align: center;
+    font-weight: bold;
+    color: #00ff88;
+    padding: 10px;
+    font-size: 0.9em;
+}
+
+.day {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.1em;
+    transition: all 0.3s;
+    border: 2px solid #e0e0e0;
+    background: white;
+    position: relative;
+}
+
+.day:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.day.other-month {
+    color: #ccc;
+    background: #f9f9f9;
+}
+
+.day.today {
+    border-color: #00ff88;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0, 255, 136, 0.3);
+}
+
+.day.josue {
+    background: #00ff88;
+    color: #1a1a1a;
+    border-color: #00ff88;
+    font-weight: bold;
+}
+
+.day.ivonne {
+    background: #ff69b4;
+    color: white;
+    border-color: #ff69b4;
+}
+
+.day.both {
+    background: linear-gradient(135deg, #00ff88 50%, #ff69b4 50%);
+    color: white;
+    border-color: #6a0dad;
+    font-weight: bold;
+}
+
+.day.birthday {
+    background: linear-gradient(135deg, #ffd700, #ff69b4, #6a0dad);
+    color: white;
+    border: 3px solid #ffd700;
+    font-weight: bold;
+    position: relative;
+    animation: birthdayGlow 2s infinite alternate;
+}
+
+.day.birthday::after {
+    content: '🎂';
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 0.7em;
+}
+
+@keyframes birthdayGlow {
+    from {
+        box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+    }
+    to {
+        box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+    }
+}
+
+.legend {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.legend-color {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+    border: 2px solid #ddd;
+}
+
+.legend-color.josue {
+    background: #00ff88;
+}
+
+.legend-color.ivonne {
+    background: #ff69b4;
+}
+
+.legend-color.both {
+    background: linear-gradient(135deg, #00ff88 50%, #ff69b4 50%);
+}
+
+.legend-color.birthday {
+    background: linear-gradient(135deg, #ffd700, #ff69b4, #6a0dad);
+    border-color: #ffd700;
+}
+
+.important-dates {
+    background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 25px;
+    border: 2px solid #6a0dad;
+    box-shadow: 0 5px 20px rgba(106, 13, 173, 0.3);
+}
+
+.important-dates h3 {
+    color: #00ff88;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.dates-list {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.important-date {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 20px;
+    background: #2a2a2a;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    transition: all 0.3s;
+}
+
+.important-date:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.birthday-josue {
+    border-color: #00ff88;
+}
+
+.birthday-josue:hover {
+    box-shadow: 0 8px 20px rgba(0, 255, 136, 0.4);
+}
+
+.birthday-ivonne {
+    border-color: #ff69b4;
+}
+
+.birthday-ivonne:hover {
+    box-shadow: 0 8px 20px rgba(255, 105, 180, 0.4);
+}
+
+.date-icon {
+    font-size: 2em;
+}
+
+.date-info {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.date-info strong {
+    color: #00ff88;
+    font-size: 1.1em;
+}
+
+.date-info span {
+    color: #ccc;
+    font-size: 0.9em;
+}
+
+.info-panel {
+    background: #1a1a1a;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #00ff88;
+}
+
+.info-panel h3 {
+    color: #00ff88;
+    margin-bottom: 15px;
+}
+
+#daysList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.day-info {
+    padding: 10px;
+    background: #2a2a2a;
+    color: white;
+    border-radius: 5px;
+    border-left: 4px solid #00ff88;
+}
+
+/* Modal de selección de horas */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    animation: fadeIn 0.3s;
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    border-radius: 20px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 10px 50px rgba(0, 255, 136, 0.3);
+    border: 2px solid #00ff88;
+    animation: slideUp 0.3s;
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 2px solid #00ff88;
+}
+
+.modal-header h3 {
+    color: #00ff88;
+    margin: 0;
+    font-size: 1.3em;
+}
+
+#modalDate {
+    color: #ff69b4;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    color: #ff69b4;
+    font-size: 2em;
+    cursor: pointer;
+    transition: all 0.3s;
+    line-height: 1;
+}
+
+.close-btn:hover {
+    color: #ff3388;
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 25px;
+}
+
+.modal-subtitle {
+    color: #ccc;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.modal-subtitle strong {
+    color: #00ff88;
+}
+
+.time-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.time-slot {
+    padding: 12px 8px;
+    background: #2a2a2a;
+    border: 2px solid #444;
+    border-radius: 8px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    color: #ccc;
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+.time-slot:hover {
+    border-color: #00ff88;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.2);
+}
+
+.time-slot.selected {
+    background: #00ff88;
+    color: #1a1a1a;
+    border-color: #00ff88;
+    font-weight: bold;
+}
+
+.time-slot.selected:hover {
+    background: #00cc70;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 25px;
+    border-top: 2px solid #00ff88;
+    gap: 15px;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 12px 30px;
+    border: none;
+    border-radius: 25px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background: #00ff88;
+    color: #1a1a1a;
+    flex: 1;
+}
+
+.btn-primary:hover {
+    background: #00cc70;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 255, 136, 0.4);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: #ff69b4;
+    border: 2px solid #ff69b4;
+}
+
+.btn-secondary:hover {
+    background: #ff69b4;
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Indicadores de horas en días */
+.day.has-hours {
+    position: relative;
+}
+
+.day.has-hours::before {
+    content: '🕒';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 0.7em;
+}
+
+.hours-indicator {
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.6em;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 1px 4px;
+    border-radius: 3px;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+    
+    header h1 {
+        font-size: 1.8em;
+    }
+    
+    .calendar {
+        gap: 5px;
+    }
+    
+    .day {
+        font-size: 0.9em;
+    }
+    
+    .important-dates h3 {
+        font-size: 1.1em;
+    }
+    
+    .dates-list {
+        flex-direction: column;
+    }
+    
+    .important-date {
+        width: 100%;
+    }
+    
+    .modal-content {
+        width: 95%;
+        max-height: 85vh;
+    }
+    
+    .time-grid {
+        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+        gap: 8px;
+    }
+    
+    .time-slot {
+        padding: 10px 5px;
+        font-size: 0.8em;
+    }
+    
+    .modal-footer {
+        flex-direction: column;
+    }
+    
+    .btn-primary,
+    .btn-secondary {
+        width: 100%;
+    }
+}
