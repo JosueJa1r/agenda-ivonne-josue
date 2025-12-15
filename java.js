@@ -48,13 +48,60 @@ const monthNames = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
 prevMonthBtn.addEventListener('click', () => changeMonth(-1));
 nextMonthBtn.addEventListener('click', () => changeMonth(1));
 
+// Mostrar mensaje de bienvenida al cargar
+window.addEventListener('DOMContentLoaded', () => {
+    showWelcomeMessage();
+    createFloatingHearts();
+});
+
 userBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         userBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         currentUser = btn.dataset.user;
+        updateWelcomeMessage();
     });
 });
+
+function showWelcomeMessage() {
+    const welcomeTitle = document.getElementById('welcomeTitle');
+    const userName = currentUser === 'josue' ? 'Josué' : 'Ivonne';
+    const emoji = currentUser === 'josue' ? '💚' : '💗';
+    
+    welcomeTitle.textContent = `¡Hola ${userName}! ${emoji}`;
+    welcomeTitle.style.color = currentUser === 'josue' ? '#00ff88' : '#ff69b4';
+}
+
+function updateWelcomeMessage() {
+    const welcomeOverlay = document.getElementById('welcomeOverlay');
+    welcomeOverlay.style.display = 'flex';
+    welcomeOverlay.style.animation = 'none';
+    welcomeOverlay.style.opacity = '1';
+    welcomeOverlay.style.visibility = 'visible';
+    
+    showWelcomeMessage();
+    
+    // Ocultar después de 2 segundos
+    setTimeout(() => {
+        welcomeOverlay.style.animation = 'fadeOut 0.5s ease forwards';
+    }, 2000);
+}
+
+function createFloatingHearts() {
+    const heartsContainer = document.getElementById('heartsContainer');
+    const heartEmojis = ['💚', '💗', '💕', '💖', '💝', '💞', '💓'];
+    
+    // Crear 20 corazones
+    for (let i = 0; i < 20; i++) {
+        const heart = document.createElement('div');
+        heart.classList.add('floating-heart');
+        heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+        heart.style.left = Math.random() * 100 + '%';
+        heart.style.animationDuration = (2 + Math.random() * 2) + 's';
+        heart.style.animationDelay = (Math.random() * 2) + 's';
+        heartsContainer.appendChild(heart);
+    }
+}
 
 closeModalBtn.addEventListener('click', closeModal);
 timeModal.addEventListener('click', (e) => {

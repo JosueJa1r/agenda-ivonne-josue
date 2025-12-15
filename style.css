@@ -11,6 +11,125 @@ body {
     padding: 20px;
 }
 
+/* Overlay de bienvenida */
+.welcome-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(26, 26, 26, 0.98), rgba(106, 13, 173, 0.98));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeOut 0.5s ease 2.5s forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
+.welcome-content {
+    text-align: center;
+    position: relative;
+}
+
+.welcome-title {
+    font-size: 3.5em;
+    color: #00ff88;
+    margin-bottom: 15px;
+    animation: scaleIn 0.8s ease;
+    text-shadow: 0 0 20px rgba(0, 255, 136, 0.5);
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.welcome-subtitle {
+    font-size: 1.3em;
+    color: #ff69b4;
+    animation: fadeInUp 1s ease 0.3s both;
+}
+
+@keyframes fadeInUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+/* Corazones flotantes */
+.hearts-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.floating-heart {
+    position: absolute;
+    font-size: 2em;
+    animation: floatUp 3s ease-in infinite;
+    opacity: 0;
+}
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+.floating-heart:nth-child(1) { left: 10%; animation-delay: 0s; }
+.floating-heart:nth-child(2) { left: 20%; animation-delay: 0.5s; }
+.floating-heart:nth-child(3) { left: 30%; animation-delay: 1s; }
+.floating-heart:nth-child(4) { left: 40%; animation-delay: 0.3s; }
+.floating-heart:nth-child(5) { left: 50%; animation-delay: 0.8s; }
+.floating-heart:nth-child(6) { left: 60%; animation-delay: 0.2s; }
+.floating-heart:nth-child(7) { left: 70%; animation-delay: 0.6s; }
+.floating-heart:nth-child(8) { left: 80%; animation-delay: 0.9s; }
+.floating-heart:nth-child(9) { left: 90%; animation-delay: 0.4s; }
+.floating-heart:nth-child(10) { left: 15%; animation-delay: 1.2s; }
+.floating-heart:nth-child(11) { left: 25%; animation-delay: 0.7s; }
+.floating-heart:nth-child(12) { left: 35%; animation-delay: 1.1s; }
+.floating-heart:nth-child(13) { left: 45%; animation-delay: 0.1s; }
+.floating-heart:nth-child(14) { left: 55%; animation-delay: 1.3s; }
+.floating-heart:nth-child(15) { left: 65%; animation-delay: 0.5s; }
+.floating-heart:nth-child(16) { left: 75%; animation-delay: 1s; }
+.floating-heart:nth-child(17) { left: 85%; animation-delay: 0.3s; }
+.floating-heart:nth-child(18) { left: 95%; animation-delay: 0.8s; }
+.floating-heart:nth-child(19) { left: 5%; animation-delay: 0.6s; }
+.floating-heart:nth-child(20) { left: 50%; animation-delay: 0.2s; }
+
 .container {
     max-width: 900px;
     margin: 0 auto;
