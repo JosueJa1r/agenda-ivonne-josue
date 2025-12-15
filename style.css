@@ -671,6 +671,7 @@ header h1 {
     z-index: 10000;
     display: none;
     min-width: 200px;
+    max-width: 90vw;
     pointer-events: none;
     animation: tooltipFadeIn 0.2s;
 }
@@ -726,56 +727,216 @@ header h1 {
     line-height: 1.4;
 }
 
-@media (max-width: 768px) {
-    .container {
-        padding: 15px;
-    }
-    
+/* Para pantallas muy pequeñas */
+@media (max-width: 400px) {
     header h1 {
-        font-size: 1.8em;
+        font-size: 1.3em;
     }
     
-    .calendar {
-        gap: 5px;
+    .user-btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+    
+    .calendar-header h2 {
+        font-size: 1.1em;
     }
     
     .day {
+        font-size: 0.8em;
+        min-height: 40px;
+    }
+    
+    .calendar {
+        gap: 3px;
+    }
+    
+    .welcome-title {
+        font-size: 2em;
+    }
+    
+    .important-date {
+        padding: 10px;
+    }
+    
+    .date-icon {
+        font-size: 1.3em;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+    
+    .container {
+        padding: 15px 10px;
+        border-radius: 15px;
+    }
+    
+    header h1 {
+        font-size: 1.5em;
+        margin-bottom: 8px;
+    }
+    
+    .subtitle {
         font-size: 0.9em;
+    }
+    
+    .user-selector {
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+    
+    .user-btn {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+    
+    .calendar-header {
+        margin-bottom: 15px;
+        padding: 0 10px;
+    }
+    
+    .calendar-header h2 {
+        font-size: 1.3em;
+    }
+    
+    .calendar-header button {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2em;
+    }
+    
+    .calendar {
+        gap: 4px;
+    }
+    
+    .day-name {
+        font-size: 0.75em;
+        padding: 8px 2px;
+    }
+    
+    .day {
+        font-size: 0.85em;
+        border-radius: 8px;
+        min-height: 45px;
+    }
+    
+    .day.has-hours::before {
+        font-size: 0.6em;
+        top: 1px;
+        left: 1px;
+    }
+    
+    .hours-indicator {
+        font-size: 0.55em;
+        padding: 1px 3px;
+        bottom: 1px;
+    }
+    
+    .legend {
+        gap: 15px;
+        margin-bottom: 20px;
+        font-size: 0.85em;
+    }
+    
+    .legend-color {
+        width: 25px;
+        height: 25px;
+    }
+    
+    .important-dates {
+        padding: 15px;
+        margin-bottom: 20px;
     }
     
     .important-dates h3 {
         font-size: 1.1em;
+        margin-bottom: 12px;
     }
     
     .dates-list {
         flex-direction: column;
+        gap: 10px;
     }
     
     .important-date {
         width: 100%;
+        padding: 12px 15px;
+    }
+    
+    .date-icon {
+        font-size: 1.5em;
+    }
+    
+    .date-info strong {
+        font-size: 1em;
+    }
+    
+    .date-info span {
+        font-size: 0.85em;
+    }
+    
+    .info-panel {
+        padding: 15px;
+    }
+    
+    .info-panel h3 {
+        font-size: 1em;
+        margin-bottom: 12px;
+    }
+    
+    .day-info {
+        padding: 8px;
+        font-size: 0.85em;
     }
     
     .modal-content {
         width: 95%;
         max-height: 85vh;
+        border-radius: 15px;
+    }
+    
+    .modal-header h3 {
+        font-size: 1.1em;
+    }
+    
+    .modal-subtitle {
+        font-size: 0.9em;
     }
     
     .time-grid {
-        grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(65px, 1fr));
         gap: 8px;
     }
     
     .time-slot {
         padding: 10px 5px;
-        font-size: 0.8em;
+        font-size: 0.85em;
     }
     
     .modal-footer {
         flex-direction: column;
+        gap: 10px;
     }
     
     .btn-primary,
     .btn-secondary {
         width: 100%;
+        padding: 10px 20px;
+        font-size: 0.95em;
+    }
+    
+    .welcome-title {
+        font-size: 2.5em;
+    }
+    
+    .welcome-subtitle {
+        font-size: 1em;
+    }
+    
+    .floating-heart {
+        font-size: 1.5em;
     }
 }
